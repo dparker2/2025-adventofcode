@@ -8,20 +8,20 @@ const output = input
   .split("\n")
   .map(Number)
   .reduce(
-    (prev, num) => {
-      const clicks = prev.pointer + num;
-      const pointer = mod(clicks, 100);
-      const password1 = prev.password1 + Number(pointer === 0);
-      const password2 = 0; // TODO
+    (acc, num) => {
+      // unga bunga
+      let clicks;
+      const step = num < 0 ? -1 : 1;
+      for (clicks = 0; clicks !== num; clicks += step) {
+        acc.pointer = mod(acc.pointer + step, 100);
+        acc.pw2 += Number(acc.pointer === 0);
+      }
+      acc.pw1 += Number(acc.pointer === 0);
 
-      return {
-        password1,
-        password2,
-        pointer,
-      };
+      return acc;
     },
-    { password1: 0, password2: 0, pointer: 50 }
+    { pw1: 0, pw2: 0, pointer: 50 }
   );
 
-console.log(`Part 1: ${output.password1}`);
-console.log(`Part 2: ${output.password2}`);
+console.log(`Part 1: ${output.pw1}`);
+console.log(`Part 2: ${output.pw2}`);
