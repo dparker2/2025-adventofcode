@@ -1,8 +1,8 @@
-import { $ } from "bun";
 import { test, expect } from "bun:test";
+import { main } from "./day01";
 
-const output = await $`bun run day01.ts < ${Buffer.from(`
-L68
+const out = main(
+  `L68
 L30
 R48
 L5
@@ -11,13 +11,13 @@ L55
 L1
 L99
 R14
-L82
-`)}`.text();
+L82`
+);
 
 test("Part 1", () => {
-  expect(output).toInclude("Part 1: 3");
+  expect(out.part1).toBe(3);
 });
 
 test("Part 2", () => {
-  expect(output).toInclude("Part 2: 6");
+  expect(out.part2).toBe(6);
 });
